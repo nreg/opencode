@@ -3,12 +3,13 @@ import { createEffect, Match, onCleanup, splitProps, Switch, type JSX } from "so
 import type { ComponentProps } from "solid-js"
 import { createStore } from "solid-js/store"
 
-export interface TooltipProps extends ComponentProps<typeof KobalteTooltip> {
+export interface TooltipProps extends Omit<ComponentProps<typeof KobalteTooltip>, "openDelay"> {
   value: JSX.Element
   class?: string
   contentClass?: string
   contentStyle?: JSX.CSSProperties
   inactive?: boolean
+  instant?: boolean
   forceOpen?: boolean
 }
 
@@ -45,6 +46,7 @@ export function Tooltip(props: TooltipProps) {
     "contentClass",
     "contentStyle",
     "inactive",
+    "instant",
     "forceOpen",
     "ignoreSafeArea",
     "value",
@@ -107,7 +109,7 @@ export function Tooltip(props: TooltipProps) {
       <Match when={true}>
         <KobalteTooltip
           gutter={4}
-          openDelay={400}
+          openDelay={local.instant ? 0 : 400}
           skipDelayDuration={300}
           {...others}
           closeDelay={0}

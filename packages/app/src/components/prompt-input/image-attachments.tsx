@@ -55,7 +55,6 @@ export const PromptImageAttachments: Component<PromptImageAttachmentsProps> = (p
                   <TooltipV2
                     value={item.comment}
                     placement="top"
-                    openDelay={800}
                     contentClass="max-w-[300px] break-words"
                   >
                     <CommentCardV2
